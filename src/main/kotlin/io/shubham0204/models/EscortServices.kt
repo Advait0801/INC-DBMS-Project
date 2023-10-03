@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class EscortServices( private val database: Database ) {
+class EscortServices( database: Database ) {
 
     @Serializable
     data class Escort(
