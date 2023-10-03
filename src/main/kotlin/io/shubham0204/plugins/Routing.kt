@@ -3,10 +3,7 @@ package io.shubham0204.plugins
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.shubham0204.models.EscortServices
-import io.shubham0204.models.JudgeAllocationServices
-import io.shubham0204.models.JudgeServices
-import io.shubham0204.models.TeamServices
+import io.shubham0204.models.*
 import org.jetbrains.exposed.sql.Database
 
 fun Application.configureRouting( database: Database ) {
@@ -14,6 +11,7 @@ fun Application.configureRouting( database: Database ) {
     val judgeServices = JudgeServices( database )
     val judgeAllocationServices = JudgeAllocationServices( database )
     val teamServices = TeamServices( database )
+    val participantServices = ParticipantServices( database )
 
     routing {
         EscortRoutes( escortServices )
