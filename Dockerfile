@@ -1,5 +1,6 @@
 FROM openjdk:18
 EXPOSE 8080:8080
 WORKDIR app/
-COPY ./build/libs/*-all.jar /app/backend.jar
-ENTRYPOINT [ "java" , "-jar" , "/app/backend.jar" ]
+COPY . /app/
+RUN ./gradlew buildFatJar
+CMD [ "java" , "-jar" , "/app/build/libs/io.shubham0204.inc-server-all.jar" ]
