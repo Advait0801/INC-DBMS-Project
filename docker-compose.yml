@@ -1,0 +1,41 @@
+services:
+
+  server:
+    build: .
+    image: inc_server
+    container_name: "inc_server"
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+    networks:
+      - inc_server_network
+
+  database:
+    image: mysql:8.1.0
+    container_name: "inc_database"
+    restart:  always
+    environment:
+      MYSQL_HOST: database
+      MYSQL_DATABASE: 'inc_database'
+      MYSQL_ROOT_PASSWORD: 'root'
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      timeout: 50s
+      retries: 10
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    networks:
+      - inc_server_network
+
+networks:
+  inc_server_network:
+
+volumes:
+  mysql_volume:
