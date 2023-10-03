@@ -11,7 +11,7 @@ import io.shubham0204.plugins.configureSerialization
 fun main() {
     embeddedServer(
         Netty,
-        port = 8080,
+        port = System.getenv( "PORT" ).toIntOrNull() ?: 8080,
         host = "0.0.0.0",
         module = Application::module)
         .start(wait = true)
