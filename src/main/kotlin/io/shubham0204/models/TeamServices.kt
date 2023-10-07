@@ -17,7 +17,6 @@ class TeamServices( database : Database ) {
         val abstract: String,
         val domain: String,
         val projectType: String,
-        val leaderId: Int,
         val roomNumber: String,
         val instituteName: String
     )
@@ -28,7 +27,6 @@ class TeamServices( database : Database ) {
         val abstract = text( "abstract" )
         val domain = varchar( "domain" , length = 20 )
         val projectType = varchar( "project_type" , length = 20 )
-        val leaderId = integer( "leader_id" ) references ParticipantServices.ParticipantTable.participantId
         val roomNumber = varchar( "room_number" , length = 5 )
         val instituteName = varchar( "institute_name" , length = 50 )
         override val primaryKey = PrimaryKey( teamId )
@@ -53,7 +51,6 @@ class TeamServices( database : Database ) {
                     it[ TeamsTable.abstract ],
                     it[ TeamsTable.domain ],
                     it[ TeamsTable.projectType ],
-                    it[ TeamsTable.leaderId ],
                     it[ TeamsTable.roomNumber ],
                     it[ TeamsTable.instituteName ]
                 )
