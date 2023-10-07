@@ -1,1 +1,2 @@
-Initial code
+- Added `autoIncrement` to ID columns
+- Added 'get_all' methods for escorts, judges and teams

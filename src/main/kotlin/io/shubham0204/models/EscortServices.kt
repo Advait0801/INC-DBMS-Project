@@ -18,7 +18,7 @@ class EscortServices( database: Database ) {
     )
 
     object EscortsTable: Table( name = "escorts" ) {
-        val escortId = integer( "escort_id" )
+        val escortId = integer( "escort_id" ).autoIncrement()
         val name = varchar( "name" , length = 20 )
         val contactNumber = char( "contact_number" , length = 10 )
         val judgeId = integer( "judge_id" ) references JudgeServices.JudgesTable.judgeId

@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -22,12 +23,12 @@ class TeamServices( database : Database ) {
     )
 
     object TeamsTable: Table( name="teams" ) {
-        val teamId = integer( "team_id" )
+        val teamId = integer( "team_id" ).autoIncrement()
         val name = varchar( "name" , length = 20 )
         val abstract = text( "abstract" )
         val domain = varchar( "domain" , length = 20 )
         val projectType = varchar( "project_type" , length = 20 )
-        val leaderId = integer( "leader_id" )
+        val leaderId = integer( "leader_id" ) references ParticipantServices.ParticipantTable.participantId
         val roomNumber = varchar( "room_number" , length = 5 )
         val instituteName = varchar( "institute_name" , length = 50 )
         override val primaryKey = PrimaryKey( teamId )
@@ -41,5 +42,23 @@ class TeamServices( database : Database ) {
             SchemaUtils.create( TeamsTable )
         }
     }
+
+    suspend fun getAllTeams() : List<Team> = dbQuery {
+        TeamsTable
+            .selectAll()
+            .map {
+                Team(
+                    it[ TeamsTable.teamId ],
+                    it[ TeamsTable.name ],
+                    it[ TeamsTable.abstract ],
+                    it[ TeamsTable.domain ],
+                    it[ TeamsTable.projectType ],
+                    it[ TeamsTable.leaderId ],
+                    it[ TeamsTable.roomNumber ],
+                    it[ TeamsTable.instituteName ]
+                )
+            }
+    }
+
 
 }

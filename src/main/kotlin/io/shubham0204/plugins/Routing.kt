@@ -14,13 +14,14 @@ fun Application.configureRouting( database: Database ) {
     val participantServices = ParticipantServices( database )
 
     routing {
-        EscortRoutes( escortServices )
-        JudgeRoutes( judgeServices )
-        TestRoutes()
+        escortRoutes( escortServices )
+        judgeRoutes( judgeServices )
+        teamRoutes( teamServices )
+        testRoutes()
     }
 }
 
-private fun Routing.TestRoutes() {
+private fun Routing.testRoutes() {
     get( "/echo/{message}" ) {
         if( call.parameters[ "message" ] != null ) {
             call.respondText( call.parameters[ "message" ]!! )
@@ -28,14 +29,19 @@ private fun Routing.TestRoutes() {
     }
 }
 
+private fun Routing.teamRoutes(teamServices: TeamServices ) {
+    get( "/teams" ) {
+        call.respond( teamServices.getAllTeams() )
+    }
+}
 
-private fun Routing.JudgeRoutes( judgeServices: JudgeServices ) {
+private fun Routing.judgeRoutes(judgeServices: JudgeServices ) {
     get( "/judges" ) {
         call.respond( judgeServices.getAllJudges() )
     }
 }
 
-private fun Routing.EscortRoutes( escortServices: EscortServices ) {
+private fun Routing.escortRoutes(escortServices: EscortServices ) {
     get( "/escorts/{id}" ) {
         val escortID = call.parameters[ "id" ]
     }

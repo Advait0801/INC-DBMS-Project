@@ -19,10 +19,10 @@ class JudgeServices( database: Database ) {
     )
 
     object JudgesTable: Table( name = "judges" ) {
-        val judgeId = integer( "judge_id" )
+        val judgeId = integer( "judge_id" ).autoIncrement()
         val name = varchar( "name" , length = 20 )
         val domain = varchar( "domain" , length = 20 )
-        val contactNumber = char( "contact_number" , length = 20 )
+        val contactNumber = char( "contact_number" , length = 10 )
         override val primaryKey = PrimaryKey( judgeId )
     }
 
