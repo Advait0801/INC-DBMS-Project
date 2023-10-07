@@ -21,6 +21,7 @@ class ParticipantServices( database : Database ) {
         val name = varchar( "name" , length = 20 )
         val teamId = integer( "team_id" ) references TeamServices.TeamsTable.teamId
         val contactNumber = char( "contact_number" )
+        override val primaryKey = PrimaryKey( participantId )
     }
 
     init {
