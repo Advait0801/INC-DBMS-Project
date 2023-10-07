@@ -48,7 +48,6 @@ class JudgeAllocationServices( database : Database ) {
                     it[TeamServices.TeamsTable.abstract],
                     it[TeamServices.TeamsTable.domain],
                     it[TeamServices.TeamsTable.projectType],
-                    it[TeamServices.TeamsTable.leaderId],
                     it[TeamServices.TeamsTable.roomNumber],
                     it[TeamServices.TeamsTable.instituteName],
                 )
