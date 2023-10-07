@@ -19,17 +19,15 @@ class _TeamsDataState extends State<TeamsData> {
           child: Text(
             'Teams',
             style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.08,
-              color: Colors.white
-            ),
+                fontSize: MediaQuery.of(context).size.width * 0.08,
+                color: Colors.white),
           ),
         ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.01,
-          horizontal: MediaQuery.of(context).size.width * 0.02
-        ),
+            vertical: MediaQuery.of(context).size.height * 0.01,
+            horizontal: MediaQuery.of(context).size.width * 0.02),
         child: Column(
           children: [
             TeamDataCard(teamID: 1, teamName: 'A', domain: 'CN'),
@@ -48,3 +46,5 @@ class _TeamsDataState extends State<TeamsData> {
     );
   }
 }
+
+
