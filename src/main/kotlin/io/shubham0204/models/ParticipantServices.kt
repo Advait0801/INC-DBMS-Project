@@ -20,7 +20,7 @@ class ParticipantServices( database : Database ) {
         val participantId = integer( "participant_id" ).autoIncrement()
         val name = varchar( "name" , length = 20 )
         val teamId = integer( "team_id" ) references TeamServices.TeamsTable.teamId
-        val contactNumber = char( "contact_number" )
+        val contactNumber = char( "contact_number" , length = 10 )
         override val primaryKey = PrimaryKey( participantId )
     }
 

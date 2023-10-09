@@ -23,7 +23,7 @@ class JudgeAllocationServices( database : Database ) {
 
     suspend fun getJudgesForTeam( teamId: Int ) : List<JudgeServices.Judge> = dbQuery {
         JudgeAllocationTable
-            .innerJoin( JudgeServices.JudgesTable , { JudgeAllocationTable.judgeId } , { JudgeServices.JudgesTable.judgeId } )
+            .innerJoin( JudgeServices.JudgesTable , { judgeId } , { judgeId } )
             .innerJoin( TeamServices.TeamsTable  , { JudgeAllocationTable.teamId } , { TeamServices.TeamsTable.teamId } )
             .select( TeamServices.TeamsTable.teamId eq teamId )
             .map {

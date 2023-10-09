@@ -28,7 +28,7 @@ class TeamServices( database : Database ) {
         val domain = varchar( "domain" , length = 20 )
         val projectType = varchar( "project_type" , length = 20 )
         val roomNumber = varchar( "room_number" , length = 5 )
-        val instituteName = varchar( "institute_name" , length = 50 )
+        val instituteName = varchar( "institute_name" , length = 100 )
         override val primaryKey = PrimaryKey( teamId )
     }
 
