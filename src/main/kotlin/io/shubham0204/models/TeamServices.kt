@@ -1,10 +1,8 @@
 package io.shubham0204.models
 
 import kotlinx.serialization.Serializable
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -53,6 +51,27 @@ class TeamServices( database : Database ) {
                     it[ TeamsTable.projectType ],
                     it[ TeamsTable.roomNumber ],
                     it[ TeamsTable.instituteName ]
+                )
+            }
+    }
+
+    suspend fun getTeamsFromEscortID( escortId: Int ): List<Team> = dbQuery {
+        val judgeId = EscortServices.EscortsTable
+            .select( EscortServices.EscortsTable.escortId eq escortId )
+            .single()[EscortServices.EscortsTable.judgeId]
+        JudgeAllocationServices.JudgeAllocationTable
+            .innerJoin( JudgeServices.JudgesTable , { JudgeAllocationServices.JudgeAllocationTable.judgeId } , { JudgeServices.JudgesTable.judgeId } )
+            .innerJoin( TeamsTable  , { JudgeAllocationServices.JudgeAllocationTable.teamId } , { teamId } )
+            .select( TeamsTable.teamId eq judgeId )
+            .map {
+                TeamServices.Team(
+                    it[TeamsTable.teamId] ,
+                    it[TeamsTable.name],
+                    it[TeamsTable.abstract],
+                    it[TeamsTable.domain],
+                    it[TeamsTable.projectType],
+                    it[TeamsTable.roomNumber],
+                    it[TeamsTable.instituteName],
                 )
             }
     }

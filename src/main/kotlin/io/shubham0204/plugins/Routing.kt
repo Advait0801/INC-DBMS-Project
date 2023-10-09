@@ -80,6 +80,18 @@ private fun Routing.teamRoutes( teamServices: TeamServices ) {
     get( "/teams" ) {
         call.respond( teamServices.getAllTeams() )
     }
+    get( "/teams/from-escort/{escort_id}" ) {
+        val escortId = call.parameters[ "escort_id" ]
+        if( escortId.isNullOrBlank() ) {
+            call.respond(
+                HttpStatusCode.InternalServerError ,
+                "Please provide a valid escort_id parameter."
+            )
+        }
+        else {
+            call.respond( teamServices.getTeamsFromEscortID( escortId.toInt() ) )
+        }
+    }
 }
 
 private fun Routing.judgeRoutes(judgeServices: JudgeServices ) {
