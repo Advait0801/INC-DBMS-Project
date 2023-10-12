@@ -54,7 +54,6 @@ class TeamServices( database : Database ) {
                 )
             }
     }
-
     suspend fun getTeamsFromEscortID( escortId: Int ): List<Team> = dbQuery {
         val judgeId = EscortServices.EscortsTable
             .select( EscortServices.EscortsTable.escortId eq escortId )

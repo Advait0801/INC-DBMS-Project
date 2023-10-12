@@ -1,1 +1,1 @@
-- Added endpoint for getting team details from escort ID
+- Added endpoint for getting judge's contact number from ID

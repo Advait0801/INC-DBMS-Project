@@ -1,0 +1,17 @@
+
+
+6. Update Judge information (or delete)
+7. Update Judge Allocation table (update teams for judges, update judges for teams)
+
+
+<=============== Implemented =====================>
+
+1. (Done) Get All Judges
+2. (Done) Get All Escorts
+3. (Done) Get All Teams
+4. Get Judges given team_id
+5. Get Teams given judge_id
+6. Get Escort from ID
+7. Get Escort from Judge ID
+8. Escort -> Judge -> Team (Project details with room number)
+9. Provide judge contact number

@@ -3,6 +3,7 @@ package io.shubham0204.models
 import io.shubham0204.models.JudgeServices.JudgesTable.innerJoin
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -44,6 +45,15 @@ class JudgeServices( database: Database ) {
                     it[ JudgesTable.contactNumber ]
                 )
             }
+    }
+
+    suspend fun getContactNumber( judgeId: Int ) : String = dbQuery {
+        JudgesTable
+            .select( JudgesTable.judgeId eq judgeId )
+            .map {
+                it[ JudgesTable.contactNumber ]
+            }
+            .single()
     }
 
 }

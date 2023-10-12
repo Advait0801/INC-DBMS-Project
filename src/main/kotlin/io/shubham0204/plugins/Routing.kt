@@ -98,6 +98,18 @@ private fun Routing.judgeRoutes(judgeServices: JudgeServices ) {
     get( "/judges" ) {
         call.respond( judgeServices.getAllJudges() )
     }
+    get( "/judges/contact_num/{judge_id}" ) {
+        val judgeId = call.parameters[ "judge_id" ]
+        if( judgeId.isNullOrBlank() ) {
+            call.respond(
+                HttpStatusCode.InternalServerError ,
+                "Please provide a valid judge_id parameter."
+            )
+        }
+        else {
+            call.respond( mapOf( "contact_number" to judgeServices.getContactNumber( judgeId.toInt() ) ) )
+        }
+    }
 }
 
 private fun Routing.escortRoutes(escortServices: EscortServices ) {
