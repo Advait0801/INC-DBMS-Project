@@ -1,4 +1,4 @@
-class TeamsData {
+class EscortsData {
   final int teamId;
   final String teamName;
   final String projectAbstract;
@@ -7,7 +7,7 @@ class TeamsData {
   final String roomNumber;
   final String instituteName;
 
-  TeamsData({
+  EscortsData({
     required this.teamId,
     required this.teamName,
     required this.projectAbstract,
@@ -17,8 +17,8 @@ class TeamsData {
     required this.instituteName,
   });
 
-  factory TeamsData.fromJson(Map<String, dynamic> json) {
-    return TeamsData(
+  factory EscortsData.fromJson(Map<String, dynamic> json) {
+    return EscortsData(
       teamId: json['teamId'],
       teamName: json['name'],
       projectAbstract: json['abstract'],
