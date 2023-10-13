@@ -28,7 +28,7 @@ class _TeamsDataState extends State<TeamsData> {
         padding: EdgeInsets.symmetric(
             vertical: MediaQuery.of(context).size.height * 0.01,
             horizontal: MediaQuery.of(context).size.width * 0.02),
-        child: Column(
+        child: const Column(
           children: [
             TeamDataCard(teamID: 1, teamName: 'A', domain: 'CN'),
             TeamDataCard(teamID: 2, teamName: 'B', domain: 'AD'),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class JudgeDataCard extends StatelessWidget {
-  final int JudgeID;
-  final String JudgeName;
-  final String Projects;
-  const JudgeDataCard({super.key, required this.JudgeID, required this.JudgeName, required this.Projects});
+  final int judgeId;
+  final String judgeName;
+  final String projects;
+  const JudgeDataCard({super.key, required this.judgeId, required this.judgeName, required this.projects});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class JudgeDataCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'JudgeId: $JudgeID',
+                    'judgeId: $judgeId;',
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.05,
                       color: Colors.black,
@@ -36,7 +36,7 @@ class JudgeDataCard extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.002,),
                   Text(
-                    'Judge Name: $JudgeName',
+                    'Judge Name: $judgeName',
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.05,
                         color: Colors.black,
@@ -45,7 +45,7 @@ class JudgeDataCard extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.002,),
                   Text(
-                    'Projects: $Projects',
+                    'projects: $projects',
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.05,
                         color: Colors.black,

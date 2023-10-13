@@ -28,17 +28,17 @@ class _JudgesDataState extends State<JudgesData> {
         padding: EdgeInsets.symmetric(
             vertical: MediaQuery.of(context).size.height * 0.01,
             horizontal: MediaQuery.of(context).size.width * 0.02),
-        child: Column(
+        child: const Column(
           children: [
-            JudgeDataCard(JudgeID: 1, JudgeName: "Niranjan Joshi", Projects: "CN001"),
-            JudgeDataCard(JudgeID: 2, JudgeName: "B", Projects: "AD002"),
-            JudgeDataCard(JudgeID: 3, JudgeName: "C", Projects: "ES002"),
-            JudgeDataCard(JudgeID: 4, JudgeName: "D", Projects: "CN002"),
-            JudgeDataCard(JudgeID: 5, JudgeName: "E", Projects: "AD002"),
-            JudgeDataCard(JudgeID: 6, JudgeName: "F", Projects: "AD002"),
-            JudgeDataCard(JudgeID: 7, JudgeName: "G", Projects: "AD002"),
-            JudgeDataCard(JudgeID: 8, JudgeName: "H", Projects: "AD002"),
-            JudgeDataCard(JudgeID: 9, JudgeName: "I", Projects: "AD002")
+            JudgeDataCard(judgeId: 1, judgeName: "Niranjan Joshi", projects: "CN001"),
+            JudgeDataCard(judgeId: 2, judgeName: "B", projects: "AD002"),
+            JudgeDataCard(judgeId: 3, judgeName: "C", projects: "ES002"),
+            JudgeDataCard(judgeId: 4, judgeName: "D", projects: "CN002"),
+            JudgeDataCard(judgeId: 5, judgeName: "E", projects: "AD002"),
+            JudgeDataCard(judgeId: 6, judgeName: "F", projects: "AD002"),
+            JudgeDataCard(judgeId: 7, judgeName: "G", projects: "AD002"),
+            JudgeDataCard(judgeId: 8, judgeName: "H", projects: "AD002"),
+            JudgeDataCard(judgeId: 9, judgeName: "I", projects: "AD002")
 
           ],
         ),
