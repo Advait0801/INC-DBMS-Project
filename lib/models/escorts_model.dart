@@ -1,31 +1,22 @@
-class EscortsData {
-  final int teamId;
-  final String teamName;
-  final String projectAbstract;
-  final String domain;
-  final String projectType;
-  final String roomNumber;
-  final String instituteName;
+class EscortsDataModel {
+  final int escortId;
+  final String escortName;
+  final String contactNumber;
+  final int judgeId;
 
-  EscortsData({
-    required this.teamId,
-    required this.teamName,
-    required this.projectAbstract,
-    required this.domain,
-    required this.roomNumber,
-    required this.projectType,
-    required this.instituteName,
+  EscortsDataModel({
+    required this.escortId,
+    required this.escortName,
+    required this.contactNumber,
+    required this.judgeId
   });
 
-  factory EscortsData.fromJson(Map<String, dynamic> json) {
-    return EscortsData(
-      teamId: json['teamId'],
-      teamName: json['name'],
-      projectAbstract: json['abstract'],
-      domain: json['domain'],
-      projectType: json['projectType'],
-      roomNumber: json['roomNumber'],
-      instituteName: json['instituteName'],
+  factory EscortsDataModel.fromJson(Map<String, dynamic> json) {
+    return EscortsDataModel(
+      escortId: json['escortId'],
+      escortName: json['name'],
+      contactNumber: json['contactNumber'],
+      judgeId: json['judgeId']
     );
   }
 }

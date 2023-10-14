@@ -1,5 +1,8 @@
+import 'package:dbmsl_mini_project/models/judges_model.dart';
 import 'package:dbmsl_mini_project/widgets/judges_data_card.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class JudgesData extends StatefulWidget {
   const JudgesData({super.key});
@@ -10,6 +13,21 @@ class JudgesData extends StatefulWidget {
 }
 
 class _JudgesDataState extends State<JudgesData> {
+  late Future<List<JudgesDataModel>> judgesData;
+
+  Future<List<JudgesDataModel>> getTeamsList() async {
+    Uri url = Uri.parse("http://40.81.243.181:8080/judges");
+    http.Response response = await http.get(url);
+    final List data = json.decode(response.body);
+    return data.map((e) => JudgesDataModel.fromJson(e)).toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    judgesData = getTeamsList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,25 +42,38 @@ class _JudgesDataState extends State<JudgesData> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.height * 0.01,
-            horizontal: MediaQuery.of(context).size.width * 0.02),
-        child: const Column(
-          children: [
-            JudgeDataCard(judgeId: 1, judgeName: "Niranjan Joshi", projects: "CN001"),
-            JudgeDataCard(judgeId: 2, judgeName: "B", projects: "AD002"),
-            JudgeDataCard(judgeId: 3, judgeName: "C", projects: "ES002"),
-            JudgeDataCard(judgeId: 4, judgeName: "D", projects: "CN002"),
-            JudgeDataCard(judgeId: 5, judgeName: "E", projects: "AD002"),
-            JudgeDataCard(judgeId: 6, judgeName: "F", projects: "AD002"),
-            JudgeDataCard(judgeId: 7, judgeName: "G", projects: "AD002"),
-            JudgeDataCard(judgeId: 8, judgeName: "H", projects: "AD002"),
-            JudgeDataCard(judgeId: 9, judgeName: "I", projects: "AD002")
-
-          ],
+      body: Center(
+        child: FutureBuilder<List<JudgesDataModel>>(
+          future: judgesData,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // until data is fetched, show loader
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasData) {
+              // once data is fetched, display it on screen (call buildPosts())
+              final data = snapshot.data!;
+              return buildPosts(data);
+            } else {
+              return const Text("No data available");
+            }
+          },
         ),
       ),
+    );
+  }
+
+  Widget buildPosts(List<JudgesDataModel> data) {
+    // ListView Builder to show data in a list
+    return ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (context, index) {
+        final judge = data[index];
+        return JudgeDataCard(
+          judgeId: judge.judgeId,
+          judgeName: judge.judgeName,
+          domain: judge.domain
+        );
+      },
     );
   }
 }

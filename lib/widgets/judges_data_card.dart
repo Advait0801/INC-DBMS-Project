@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class JudgeDataCard extends StatelessWidget {
   final int judgeId;
   final String judgeName;
-  final String projects;
-  const JudgeDataCard({super.key, required this.judgeId, required this.judgeName, required this.projects});
+  final String domain;
+  const JudgeDataCard({super.key, required this.judgeId, required this.judgeName, required this.domain});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class JudgeDataCard extends StatelessWidget {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.002,),
                   Text(
-                    'projects: $projects',
+                    'domain: $domain',
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.05,
                         color: Colors.black,

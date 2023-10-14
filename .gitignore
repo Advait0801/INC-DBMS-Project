@@ -31,7 +31,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-resources/
+inc-server-vm-key.pem
 
 # Symbolication related
 app.*.symbols

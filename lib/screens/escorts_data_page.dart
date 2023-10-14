@@ -1,5 +1,8 @@
+import 'package:dbmsl_mini_project/models/escorts_model.dart';
 import 'package:dbmsl_mini_project/widgets/escorts_data_card.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class EscortsData extends StatefulWidget {
   const EscortsData({super.key});
@@ -10,43 +13,67 @@ class EscortsData extends StatefulWidget {
 }
 
 class _EscortsDataState extends State<EscortsData> {
+  late Future<List<EscortsDataModel>> escortsData;
+
+  Future<List<EscortsDataModel>> getTeamsList() async {
+    Uri url = Uri.parse("http://40.81.243.181:8080/escorts");
+    http.Response response = await http.get(url);
+    final List data = json.decode(response.body);
+    return data.map((e) => EscortsDataModel.fromJson(e)).toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    escortsData = getTeamsList();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding:EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
             'Escorts',
             style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width *0.08,
-              color: Colors.white
-            ),
+                fontSize: MediaQuery.of(context).size.width * 0.08,
+                color: Colors.white),
           ),
-           ),
-        
+        ),
       ),
+      body: Center(
+        child: FutureBuilder<List<EscortsDataModel>>(
+          future: escortsData,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // until data is fetched, show loader
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasData) {
+              // once data is fetched, display it on screen (call buildPosts())
+              final data = snapshot.data!;
+              return buildPosts(data);
+            } else {
+              return const Text("No data available");
+            }
+          },
+        ),
+      ),
+    );
+  }
 
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height *0.01,
-          horizontal: MediaQuery.of(context).size.width *0.02
-        ),
-        child: Column(
-          children: [
-            EscortDataCard(EscortID: 1, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 2, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 3, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 4, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 5, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 6, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 7, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 8, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-            EscortDataCard(EscortID: 9, EscortName: 'advait', Judges_Assigned: '1,2,3'),
-          ],
-        ),
-      ),
-      
+  Widget buildPosts(List<EscortsDataModel> data) {
+    // ListView Builder to show data in a list
+    return ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (context, index) {
+        final escort = data[index];
+        return EscortDataCard(
+          escortId: escort.escortId,
+          escortName: escort.escortName,
+          judgeId: escort.judgeId
+        );
+      },
     );
   }
 }
