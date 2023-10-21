@@ -1,29 +1,23 @@
 import 'package:dbmsl_mini_project/screens/escorts_data_page.dart';
+import 'package:dbmsl_mini_project/screens/judge_data_from_teamid.dart';
 import 'package:dbmsl_mini_project/screens/judges_data_page.dart';
+import 'package:dbmsl_mini_project/screens/teams_data_from_escortid.dart';
+import 'package:dbmsl_mini_project/screens/teams_data_from_judgeid.dart';
 import 'package:dbmsl_mini_project/screens/teams_data_page.dart';
-import 'package:dbmsl_mini_project/models/teams_model.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   static const String id = 'home';
+  final textController = TextEditingController();
   final List<String> queries = [
     'Get Team allocated from Judge Id',
     'Get Team Details from Escort Id',
-    'Get Judge allocated details from Team Id',  
+    'Get Judge allocated details from Team Id',
     'Get Judge Contact Number from Judge Id',
     'Get Escort allocated from Judge Id',
     'Get Escort details from Escort Id'
   ];
-
-  Future<List<TeamsDataModel>> getTeamsListFromJudgeId(int judgeId) async {
-    Uri url = Uri.parse("http://40.81.243.181:8080/allocation/teams/{$judgeId}");
-    http.Response response = await http.get(url);
-    final List data = json.decode(response.body);
-    return data.map((e) => TeamsDataModel.fromJson(e)).toList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +107,6 @@ class HomePage extends StatelessWidget {
                 itemCount: queries.length,
                 itemBuilder: ((context, index) {
                   final query = queries[index];
-
-
-
-
                   return Padding(
                     padding: EdgeInsets.only(
                       top: 10,
@@ -128,7 +118,194 @@ class HomePage extends StatelessWidget {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.black),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (index == 0) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Enter Judge ID',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    content: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        child: Text(
+                                          'Go..',
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                        ),
+                                        onPressed: () {
+                                          int val = int.parse(textController.text);
+                                          Navigator.pop(context);
+                                          textController.clear();
+                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                            );
+                        }
+                        if (index == 1) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Enter Escort ID',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    content: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        child: Text(
+                                          'Go..',
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                        ),
+                                        onPressed: () {
+                                          int val = int.parse(textController.text);
+                                          Navigator.pop(context);
+                                          textController.clear();
+                                          Navigator.pushNamed(context, TeamsDataFromEscortId.id,arguments: val);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                            );
+                        }
+                        if (index == 2) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Enter Team ID',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    content: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        child: Text(
+                                          'Go..',
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                        ),
+                                        onPressed: () {
+                                          int val = int.parse(textController.text);
+                                          Navigator.pop(context);
+                                          textController.clear();
+                                          Navigator.pushNamed(context, JudgesDataFromTeamId.id,arguments: val);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                            );
+                        }
+                        if (index == 3) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Enter Judge ID',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    content: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        child: Text(
+                                          'Go..',
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                        ),
+                                        onPressed: () {
+                                          int val = int.parse(textController.text);
+                                          Navigator.pop(context);
+                                          textController.clear();
+                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                            );
+                        }
+                        if (index == 4) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Enter Judge ID',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    content: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        child: Text(
+                                          'Go..',
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                        ),
+                                        onPressed: () {
+                                          int val = int.parse(textController.text);
+                                          Navigator.pop(context);
+                                          textController.clear();
+                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                            );
+                        }
+                        if (index == 5) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                      'Enter Judge ID',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    content: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      MaterialButton(
+                                        child: Text(
+                                          'Go..',
+                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                        ),
+                                        onPressed: () {
+                                          int val = int.parse(textController.text);
+                                          Navigator.pop(context);
+                                          textController.clear();
+                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                            );
+                        }
+                      },
                       child: Center(
                         child: Text(
                           query,

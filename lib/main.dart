@@ -1,6 +1,9 @@
 import 'package:dbmsl_mini_project/screens/escorts_data_page.dart';
 import 'package:dbmsl_mini_project/screens/home_page.dart';
+import 'package:dbmsl_mini_project/screens/judge_data_from_teamid.dart';
 import 'package:dbmsl_mini_project/screens/judges_data_page.dart';
+import 'package:dbmsl_mini_project/screens/teams_data_from_escortid.dart';
+import 'package:dbmsl_mini_project/screens/teams_data_from_judgeid.dart';
 import 'package:dbmsl_mini_project/screens/teams_data_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +23,10 @@ class MyApp extends StatelessWidget {
         HomePage.id: (context) => HomePage(),
         TeamsData.id: (context) => const TeamsData(),
         JudgesData.id: (context) => const JudgesData(),
-        EscortsData.id: (context) => const EscortsData()
+        EscortsData.id: (context) => const EscortsData(),
+        TeamsDataFromJudgeId.id: (context) => const TeamsDataFromJudgeId(),
+        JudgesDataFromTeamId.id: (context) => const JudgesDataFromTeamId(),
+        TeamsDataFromEscortId.id: (context) => const TeamsDataFromEscortId()
       },
       initialRoute: HomePage.id,
     );
