@@ -30,9 +30,6 @@ class TeamServices( database : Database ) {
         override val primaryKey = PrimaryKey( teamId )
     }
 
-    suspend fun <T> dbQuery( block: suspend () -> T ) : T =
-        newSuspendedTransaction { block() }
-
     init {
         transaction( database ){
             SchemaUtils.create( TeamsTable )
@@ -42,17 +39,7 @@ class TeamServices( database : Database ) {
     suspend fun getAllTeams() : List<Team> = dbQuery {
         TeamsTable
             .selectAll()
-            .map {
-                Team(
-                    it[ TeamsTable.teamId ],
-                    it[ TeamsTable.name ],
-                    it[ TeamsTable.abstract ],
-                    it[ TeamsTable.domain ],
-                    it[ TeamsTable.projectType ],
-                    it[ TeamsTable.roomNumber ],
-                    it[ TeamsTable.instituteName ]
-                )
-            }
+            .map { it.toTeam() }
     }
     suspend fun getTeamsFromEscortID( escortId: Int ): List<Team> = dbQuery {
         val judgeId = EscortServices.EscortsTable
@@ -62,18 +49,7 @@ class TeamServices( database : Database ) {
             .innerJoin( JudgeServices.JudgesTable , { JudgeAllocationServices.JudgeAllocationTable.judgeId } , { JudgeServices.JudgesTable.judgeId } )
             .innerJoin( TeamsTable  , { JudgeAllocationServices.JudgeAllocationTable.teamId } , { teamId } )
             .select( TeamsTable.teamId eq judgeId )
-            .map {
-                TeamServices.Team(
-                    it[TeamsTable.teamId] ,
-                    it[TeamsTable.name],
-                    it[TeamsTable.abstract],
-                    it[TeamsTable.domain],
-                    it[TeamsTable.projectType],
-                    it[TeamsTable.roomNumber],
-                    it[TeamsTable.instituteName],
-                )
-            }
+            .map { it.toTeam() }
     }
-
 
 }

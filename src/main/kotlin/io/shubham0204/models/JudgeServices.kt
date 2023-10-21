@@ -31,9 +31,6 @@ class JudgeServices( database: Database ) {
         }
     }
 
-    suspend fun <T> dbQuery( block: suspend () -> T ) : T =
-        newSuspendedTransaction { block() }
-
     suspend fun getAllJudges() : List<Judge> = dbQuery {
         JudgesTable
             .selectAll()

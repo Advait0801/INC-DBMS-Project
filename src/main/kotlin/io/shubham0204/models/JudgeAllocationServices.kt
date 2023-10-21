@@ -18,9 +18,6 @@ class JudgeAllocationServices( database : Database ) {
         }
     }
 
-    suspend fun <T> dbQuery( block: suspend () -> T ) : T =
-        newSuspendedTransaction { block() }
-
     suspend fun getJudgesForTeam( teamId: Int ) : List<JudgeServices.Judge> = dbQuery {
         JudgeAllocationTable
             .innerJoin( JudgeServices.JudgesTable , { judgeId } , { judgeId } )
@@ -39,19 +36,9 @@ class JudgeAllocationServices( database : Database ) {
     suspend fun getTeamsForJudges( judgeId: Int ) : List<TeamServices.Team> = dbQuery {
         JudgeAllocationTable
             .innerJoin( JudgeServices.JudgesTable , { JudgeAllocationTable.judgeId } , { JudgeServices.JudgesTable.judgeId } )
-            .innerJoin( TeamServices.TeamsTable  , { JudgeAllocationTable.teamId } , { TeamServices.TeamsTable.teamId } )
-            .select( TeamServices.TeamsTable.teamId eq judgeId )
-            .map {
-                TeamServices.Team(
-                    it[TeamServices.TeamsTable.teamId] ,
-                    it[TeamServices.TeamsTable.name],
-                    it[TeamServices.TeamsTable.abstract],
-                    it[TeamServices.TeamsTable.domain],
-                    it[TeamServices.TeamsTable.projectType],
-                    it[TeamServices.TeamsTable.roomNumber],
-                    it[TeamServices.TeamsTable.instituteName],
-                )
-            }
+            .innerJoin( TeamServices.TeamsTable  , { JudgeAllocationTable.teamId } , { teamId } )
+            .select( JudgeServices.JudgesTable.judgeId eq judgeId )
+            .map { it.toTeam() }
     }
 
 

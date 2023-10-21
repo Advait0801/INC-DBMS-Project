@@ -31,31 +31,16 @@ class EscortServices( database: Database ) {
         }
     }
 
-    suspend fun <T> dbQuery( block: suspend () -> T ): T =
-        newSuspendedTransaction( Dispatchers.IO ) { block() }
-
     suspend fun getAllEscorts(): List<Escort> = dbQuery {
         EscortsTable
             .selectAll()
-            .map{ Escort(
-                    it[EscortsTable.escortId] ,
-                    it[EscortsTable.name] ,
-                    it[EscortsTable.contactNumber],
-                    it[EscortsTable.judgeId]
-                ) }
+            .map{ it.toEscort() }
     }
 
     suspend fun getEscortFromId( escortId: Int ) : Escort = dbQuery {
         EscortsTable
             .select( EscortsTable.escortId eq escortId )
-            .map {
-                Escort(
-                    it[EscortsTable.escortId] ,
-                    it[EscortsTable.name] ,
-                    it[EscortsTable.contactNumber],
-                    it[EscortsTable.judgeId]
-                )
-            }
+            .map { it.toEscort() }
             .single()
     }
 
@@ -63,14 +48,7 @@ class EscortServices( database: Database ) {
         EscortsTable
             .innerJoin( JudgeServices.JudgesTable , { EscortsTable.judgeId } , { JudgeServices.JudgesTable.judgeId } )
             .select( JudgeServices.JudgesTable.judgeId eq judgeId )
-            .map{
-                Escort(
-                    it[EscortsTable.escortId] ,
-                    it[EscortsTable.name] ,
-                    it[EscortsTable.contactNumber],
-                    it[EscortsTable.judgeId]
-                )
-            }
+            .map{ it.toEscort() }
     }
 
 
