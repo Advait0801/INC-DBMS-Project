@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
       ),
       routes: {
-        HomePage.id: (context) => const HomePage(),
+        HomePage.id: (context) => HomePage(),
         TeamsData.id: (context) => const TeamsData(),
         JudgesData.id: (context) => const JudgesData(),
         EscortsData.id: (context) => const EscortsData()

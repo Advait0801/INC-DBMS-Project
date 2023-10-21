@@ -69,10 +69,7 @@ class _TeamsDataState extends State<TeamsData> {
       itemBuilder: (context, index) {
         final team = data[index];
         return TeamDataCard(
-          teamID: team.teamId,
-          teamName: team.teamName,
-          domain: team.domain
-        );
+            teamID: team.teamId, teamName: team.teamName, domain: team.domain);
       },
     );
   }

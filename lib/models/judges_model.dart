@@ -4,19 +4,17 @@ class JudgesDataModel {
   final String domain;
   final String contactNumber;
 
-  JudgesDataModel({
-    required this.judgeId,
-    required this.judgeName,
-    required this.domain,
-    required this.contactNumber
-  });
+  JudgesDataModel(
+      {required this.judgeId,
+      required this.judgeName,
+      required this.domain,
+      required this.contactNumber});
 
   factory JudgesDataModel.fromJson(Map<String, dynamic> json) {
     return JudgesDataModel(
-      judgeId: json['judgeId'],
-      judgeName: json['name'],
-      domain: json['domain'],
-      contactNumber: json['contactNumber']
-    );
+        judgeId: json['judgeId'],
+        judgeName: json['name'],
+        domain: json['domain'],
+        contactNumber: json['contactNumber']);
   }
 }
