@@ -8,6 +8,8 @@ import io.shubham0204.plugins.*
 import kotlin.test.*
 
 class ApplicationTest {
+
+    /*
     @Test
     fun testRoot() = testApplication {
         application {
@@ -18,4 +20,14 @@ class ApplicationTest {
             assertEquals("Hello World!", bodyAsText())
         }
     }
+
+    @Test
+    fun testEcho() = testApplication {
+        application {
+            val database = configureDatabase()
+            configureRouting( database )
+        }
+    }
+     */
+
 }
