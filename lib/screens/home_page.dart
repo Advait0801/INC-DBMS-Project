@@ -15,8 +15,6 @@ class HomePage extends StatelessWidget {
     'Get Team Details from Escort Id',
     'Get Judge allocated details from Team Id',
     'Get Judge Contact Number from Judge Id',
-    'Get Escort allocated from Judge Id',
-    'Get Escort details from Escort Id'
   ];
 
   @override
@@ -99,34 +97,42 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.red,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1,
-                ),
-                itemCount: queries.length,
-                itemBuilder: ((context, index) {
-                  final query = queries[index];
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      top: 10,
-                      left: MediaQuery.of(context).size.width * 0.02,
-                      right: MediaQuery.of(context).size.width * 0.02,
-                    ),
-                    child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.black),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.9,
                       ),
-                      onPressed: () {
-                        if (index == 0) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
+                      itemCount: queries.length,
+                      itemBuilder: ((context, index) {
+                        final query = queries[index];
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            top: 10,
+                            left: MediaQuery.of(context).size.width * 0.02,
+                            right: MediaQuery.of(context).size.width * 0.02,
+                          ),
+                          child: TextButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.black),
+                            ),
+                            onPressed: () {
+                              if (index == 0) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
                                     title: Text(
                                       'Enter Judge ID',
                                       style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     content: TextField(
@@ -137,27 +143,37 @@ class HomePage extends StatelessWidget {
                                       MaterialButton(
                                         child: Text(
                                           'Go..',
-                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.05),
                                         ),
                                         onPressed: () {
-                                          int val = int.parse(textController.text);
+                                          int val =
+                                              int.parse(textController.text);
                                           Navigator.pop(context);
                                           textController.clear();
-                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
+                                          Navigator.pushNamed(
+                                              context, TeamsDataFromJudgeId.id,
+                                              arguments: val);
                                         },
                                       )
                                     ],
                                   ),
-                            );
-                        }
-                        if (index == 1) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
+                                );
+                              }
+                              if (index == 1) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
                                     title: Text(
                                       'Enter Escort ID',
                                       style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     content: TextField(
@@ -168,27 +184,37 @@ class HomePage extends StatelessWidget {
                                       MaterialButton(
                                         child: Text(
                                           'Go..',
-                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.05),
                                         ),
                                         onPressed: () {
-                                          int val = int.parse(textController.text);
+                                          int val =
+                                              int.parse(textController.text);
                                           Navigator.pop(context);
                                           textController.clear();
-                                          Navigator.pushNamed(context, TeamsDataFromEscortId.id,arguments: val);
+                                          Navigator.pushNamed(
+                                              context, TeamsDataFromEscortId.id,
+                                              arguments: val);
                                         },
                                       )
                                     ],
                                   ),
-                            );
-                        }
-                        if (index == 2) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
+                                );
+                              }
+                              if (index == 2) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
                                     title: Text(
                                       'Enter Team ID',
                                       style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     content: TextField(
@@ -199,27 +225,37 @@ class HomePage extends StatelessWidget {
                                       MaterialButton(
                                         child: Text(
                                           'Go..',
-                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.05),
                                         ),
                                         onPressed: () {
-                                          int val = int.parse(textController.text);
+                                          int val =
+                                              int.parse(textController.text);
                                           Navigator.pop(context);
                                           textController.clear();
-                                          Navigator.pushNamed(context, JudgesDataFromTeamId.id,arguments: val);
+                                          Navigator.pushNamed(
+                                              context, JudgesDataFromTeamId.id,
+                                              arguments: val);
                                         },
                                       )
                                     ],
                                   ),
-                            );
-                        }
-                        if (index == 3) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
+                                );
+                              }
+                              if (index == 3) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
                                     title: Text(
                                       'Enter Judge ID',
                                       style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     content: TextField(
@@ -230,94 +266,108 @@ class HomePage extends StatelessWidget {
                                       MaterialButton(
                                         child: Text(
                                           'Go..',
-                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.05),
                                         ),
                                         onPressed: () {
-                                          int val = int.parse(textController.text);
+                                          int val =
+                                              int.parse(textController.text);
                                           Navigator.pop(context);
                                           textController.clear();
-                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
+                                          Navigator.pushNamed(
+                                              context, TeamsDataFromJudgeId.id,
+                                              arguments: val);
                                         },
                                       )
                                     ],
                                   ),
-                            );
-                        }
-                        if (index == 4) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Text(
-                                      'Enter Judge ID',
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.05,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    content: TextField(
-                                      controller: textController,
-                                      keyboardType: TextInputType.number,
-                                    ),
-                                    actions: [
-                                      MaterialButton(
-                                        child: Text(
-                                          'Go..',
-                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
-                                        ),
-                                        onPressed: () {
-                                          int val = int.parse(textController.text);
-                                          Navigator.pop(context);
-                                          textController.clear();
-                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
-                                        },
-                                      )
-                                    ],
-                                  ),
-                            );
-                        }
-                        if (index == 5) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Text(
-                                      'Enter Judge ID',
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.05,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    content: TextField(
-                                      controller: textController,
-                                      keyboardType: TextInputType.number,
-                                    ),
-                                    actions: [
-                                      MaterialButton(
-                                        child: Text(
-                                          'Go..',
-                                          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
-                                        ),
-                                        onPressed: () {
-                                          int val = int.parse(textController.text);
-                                          Navigator.pop(context);
-                                          textController.clear();
-                                          Navigator.pushNamed(context, TeamsDataFromJudgeId.id,arguments: val);
-                                        },
-                                      )
-                                    ],
-                                  ),
-                            );
-                        }
-                      },
-                      child: Center(
-                        child: Text(
-                          query,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.height * 0.02,
+                                );
+                              }
+                            },
+                            child: Center(
+                              child: Text(
+                                query,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.height * 0.02,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                      left: MediaQuery.of(context).size.width * 0.02,
+                      right: MediaQuery.of(context).size.width * 0.02,
+                    ),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Get Escort allocated from Judge Id',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.02,
+                            ),
                           ),
                         ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                'Enter Judge ID',
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              content: TextField(
+                                controller: textController,
+                                keyboardType: TextInputType.number,
+                              ),
+                              actions: [
+                                MaterialButton(
+                                  child: Text(
+                                    'Go..',
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.05),
+                                  ),
+                                  onPressed: () {
+                                    int val = int.parse(textController.text);
+                                    Navigator.pop(context);
+                                    textController.clear();
+                                    Navigator.pushNamed(
+                                        context, TeamsDataFromJudgeId.id,
+                                        arguments: val);
+                                  },
+                                )
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ),
-                  );
-                }),
+                  )
+                ],
               ),
             ),
           ),

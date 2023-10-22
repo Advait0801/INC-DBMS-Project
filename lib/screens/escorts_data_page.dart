@@ -69,9 +69,10 @@ class _EscortsDataState extends State<EscortsData> {
       itemBuilder: (context, index) {
         final escort = data[index];
         return EscortDataCard(
-            escortId: escort.escortId,
-            escortName: escort.escortName,
-            judgeId: escort.judgeId);
+          escortId: escort.escortId,
+          escortName: escort.escortName,
+          judgeId: escort.judgeId,
+        );
       },
     );
   }

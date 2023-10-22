@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class TeamDetails extends StatelessWidget {
-  TeamDetails({super.key});
-  static const String id = 'teamDetails';
-  late int teamId;
-  late dynamic teamData;
+class JudgeDetails extends StatelessWidget {
+  JudgeDetails({super.key});
+  static const String id = 'JudgeDetails';
+  late int judgeId;
+  late dynamic judgeData;
 
-  Future<dynamic> getTeamDetails(int teamId) async {
-    Uri url = Uri.parse("http://40.81.243.181:8080/teams/$teamId");
+  Future<dynamic> getJudgeDetails(int judgeId) async {
+    Uri url = Uri.parse("http://40.81.243.181:8080/judges/$judgeId");
     http.Response response = await http.get(url);
     var data = json.decode(response.body);
     return data;
@@ -19,14 +19,14 @@ class TeamDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    teamId = ModalRoute.of(context)?.settings.arguments as int;
-    teamData = getTeamDetails(teamId);
+    judgeId = ModalRoute.of(context)?.settings.arguments as int;
+    judgeData = getJudgeDetails(judgeId);
     return Scaffold(
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Team Details',
+            'Judge Details',
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width * 0.08,
                 color: Colors.white),
@@ -34,7 +34,7 @@ class TeamDetails extends StatelessWidget {
         ),
       ),
       body: FutureBuilder(
-        future: teamData,
+        future: judgeData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // until data is fetched, show loader
@@ -59,34 +59,20 @@ class TeamDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Team ID: ' + data['teamId'].toString(),
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            'Judge ID: ' + data['judgeId'].toString(),
+            style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.1),
           ),
           Text(
-            'Team Name: ' + data['name'],
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            'Judge Name: ' + data['name'],
+            style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.1),
           ),
           Text(
-            'Team Domain: ' + data['domain'],
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            'Domain: ' + data['domain'],
+            style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.1),
           ),
           Text(
-            'Abstract: ' + data['abstract'],
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
-          ),
-          Text(
-            'Institution Name: ' + data['instituteName'],
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
-          ),
-          Text(
-            'Room No: ' + data['roomNumber'],
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            'Contact No: ' + data['contactNumber'],
+            style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.1),
           ),
         ],
       ),

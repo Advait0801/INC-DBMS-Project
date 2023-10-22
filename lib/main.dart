@@ -1,7 +1,10 @@
+import 'package:dbmsl_mini_project/screens/escort_details_page.dart';
 import 'package:dbmsl_mini_project/screens/escorts_data_page.dart';
 import 'package:dbmsl_mini_project/screens/home_page.dart';
 import 'package:dbmsl_mini_project/screens/judge_data_from_teamid.dart';
 import 'package:dbmsl_mini_project/screens/judges_data_page.dart';
+import 'package:dbmsl_mini_project/screens/judges_details_page.dart';
+import 'package:dbmsl_mini_project/screens/team_details_page.dart';
 import 'package:dbmsl_mini_project/screens/teams_data_from_escortid.dart';
 import 'package:dbmsl_mini_project/screens/teams_data_from_judgeid.dart';
 import 'package:dbmsl_mini_project/screens/teams_data_page.dart';
@@ -26,7 +29,10 @@ class MyApp extends StatelessWidget {
         EscortsData.id: (context) => const EscortsData(),
         TeamsDataFromJudgeId.id: (context) => const TeamsDataFromJudgeId(),
         JudgesDataFromTeamId.id: (context) => const JudgesDataFromTeamId(),
-        TeamsDataFromEscortId.id: (context) => const TeamsDataFromEscortId()
+        TeamsDataFromEscortId.id: (context) => const TeamsDataFromEscortId(),
+        TeamDetails.id: (context) => TeamDetails(),
+        JudgeDetails.id: (context) => JudgeDetails(),
+        EscortDetails.id: (context) => EscortDetails()
       },
       initialRoute: HomePage.id,
     );

@@ -69,9 +69,10 @@ class _JudgesDataState extends State<JudgesData> {
       itemBuilder: (context, index) {
         final judge = data[index];
         return JudgeDataCard(
-            judgeId: judge.judgeId,
-            judgeName: judge.judgeName,
-            domain: judge.domain);
+          judgeId: judge.judgeId,
+          judgeName: judge.judgeName,
+          domain: judge.domain,
+        );
       },
     );
   }

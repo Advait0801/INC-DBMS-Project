@@ -17,7 +17,8 @@ class _TeamsDataFromEscortIdState extends State<TeamsDataFromEscortId> {
   late int escortId;
 
   Future<List<TeamsDataModel>> getTeamsListFromescortId(int escortId) async {
-    Uri url = Uri.parse("http://40.81.243.181:8080/teams/from-escort/$escortId");
+    Uri url =
+        Uri.parse("http://40.81.243.181:8080/teams/from-escort/$escortId");
     http.Response response = await http.get(url);
     final List data = json.decode(response.body);
     return data.map((e) => TeamsDataModel.fromJson(e)).toList();
