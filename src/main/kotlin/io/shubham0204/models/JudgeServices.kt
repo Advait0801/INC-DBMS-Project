@@ -44,6 +44,20 @@ class JudgeServices( database: Database ) {
             }
     }
 
+    suspend fun getJudgeFromId( judgeId: Int ) : Judge = dbQuery {
+        JudgesTable
+            .select( JudgesTable.judgeId eq judgeId )
+            .map {
+                Judge(
+                    it[ JudgesTable.judgeId ] ,
+                    it[ JudgesTable.name ] ,
+                    it[ JudgesTable.domain ] ,
+                    it[ JudgesTable.contactNumber ]
+                )
+            }
+            .single()
+    }
+
     suspend fun getContactNumber( judgeId: Int ) : String = dbQuery {
         JudgesTable
             .select( JudgesTable.judgeId eq judgeId )

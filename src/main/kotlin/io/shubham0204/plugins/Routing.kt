@@ -80,6 +80,18 @@ private fun Routing.teamRoutes( teamServices: TeamServices ) {
     get( "/teams" ) {
         call.respond( teamServices.getAllTeams() )
     }
+    get( "/teams/{team_id}" ) {
+        val teamId = call.parameters[ "team_id" ]
+        if( teamId.isNullOrBlank() ) {
+            call.respond(
+                HttpStatusCode.InternalServerError ,
+                "Please provide a valid team_id parameter."
+            )
+        }
+        else {
+            call.respond( teamServices.getTeamFromId( teamId.toInt() ) )
+        }
+    }
     get( "/teams/from-escort/{escort_id}" ) {
         val escortId = call.parameters[ "escort_id" ]
         if( escortId.isNullOrBlank() ) {
@@ -97,6 +109,18 @@ private fun Routing.teamRoutes( teamServices: TeamServices ) {
 private fun Routing.judgeRoutes(judgeServices: JudgeServices ) {
     get( "/judges" ) {
         call.respond( judgeServices.getAllJudges() )
+    }
+    get( "/judges/{judge_id}" ) {
+        val judgeId = call.parameters[ "judge_id" ]
+        if( judgeId.isNullOrBlank() ) {
+            call.respond(
+                HttpStatusCode.InternalServerError ,
+                "Please provide a valid judge_id parameter."
+            )
+        }
+        else {
+            call.respond( judgeServices.getJudgeFromId( judgeId.toInt() ) )
+        }
     }
     get( "/judges/contact_num/{judge_id}" ) {
         val judgeId = call.parameters[ "judge_id" ]

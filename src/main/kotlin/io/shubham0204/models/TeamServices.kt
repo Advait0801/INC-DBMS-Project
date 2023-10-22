@@ -41,6 +41,14 @@ class TeamServices( database : Database ) {
             .selectAll()
             .map { it.toTeam() }
     }
+
+    suspend fun getTeamFromId( teamId: Int ) : Team = dbQuery {
+        TeamsTable
+            .select( TeamsTable.teamId eq teamId )
+            .map{ it.toTeam() }
+            .single()
+    }
+
     suspend fun getTeamsFromEscortID( escortId: Int ): List<Team> = dbQuery {
         val judgeId = EscortServices.EscortsTable
             .select( EscortServices.EscortsTable.escortId eq escortId )
