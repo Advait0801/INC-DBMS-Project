@@ -1,6 +1,7 @@
 import 'package:dbmsl_mini_project/screens/escort_details_page.dart';
 import 'package:dbmsl_mini_project/screens/escorts_data_page.dart';
 import 'package:dbmsl_mini_project/screens/home_page.dart';
+import 'package:dbmsl_mini_project/screens/judge_contact_details.dart';
 import 'package:dbmsl_mini_project/screens/judge_data_from_teamid.dart';
 import 'package:dbmsl_mini_project/screens/judges_data_page.dart';
 import 'package:dbmsl_mini_project/screens/judges_details_page.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         TeamsDataFromEscortId.id: (context) => const TeamsDataFromEscortId(),
         TeamDetails.id: (context) => TeamDetails(),
         JudgeDetails.id: (context) => JudgeDetails(),
-        EscortDetails.id: (context) => EscortDetails()
+        EscortDetails.id: (context) => EscortDetails(),
+        JudgeContactNumber.id: (context) => JudgeContactNumber()        
       },
       initialRoute: HomePage.id,
     );

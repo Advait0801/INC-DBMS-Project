@@ -1,4 +1,6 @@
+import 'package:dbmsl_mini_project/screens/escort_allocated_from_judge_id.dart';
 import 'package:dbmsl_mini_project/screens/escorts_data_page.dart';
+import 'package:dbmsl_mini_project/screens/judge_contact_details.dart';
 import 'package:dbmsl_mini_project/screens/judge_data_from_teamid.dart';
 import 'package:dbmsl_mini_project/screens/judges_data_page.dart';
 import 'package:dbmsl_mini_project/screens/teams_data_from_escortid.dart';
@@ -250,7 +252,7 @@ class HomePage extends StatelessWidget {
                                   context: context,
                                   builder: (context) => AlertDialog(
                                     title: Text(
-                                      'Enter Judge ID',
+                                      'Enter Judge Contactno',
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -273,12 +275,11 @@ class HomePage extends StatelessWidget {
                                                   0.05),
                                         ),
                                         onPressed: () {
-                                          int val =
-                                              int.parse(textController.text);
+                                          int val = int.parse(textController.text);
                                           Navigator.pop(context);
                                           textController.clear();
                                           Navigator.pushNamed(
-                                              context, TeamsDataFromJudgeId.id,
+                                              context, JudgeContactNumber.id,
                                               arguments: val);
                                         },
                                       )
@@ -356,7 +357,7 @@ class HomePage extends StatelessWidget {
                                     Navigator.pop(context);
                                     textController.clear();
                                     Navigator.pushNamed(
-                                        context, TeamsDataFromJudgeId.id,
+                                        context, EscortAllocatedDetails.id,
                                         arguments: val);
                                   },
                                 )
