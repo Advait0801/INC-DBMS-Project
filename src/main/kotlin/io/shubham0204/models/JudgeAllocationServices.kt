@@ -38,8 +38,8 @@ class JudgeAllocationServices( database : Database ) {
             .innerJoin( JudgeServices.JudgesTable , { JudgeAllocationTable.judgeId } , { JudgeServices.JudgesTable.judgeId } )
             .innerJoin( TeamServices.TeamsTable  , { JudgeAllocationTable.teamId } , { teamId } )
             .select( JudgeServices.JudgesTable.judgeId eq judgeId )
-            .distinct()
             .map { it.toTeam() }
+            .distinct()
     }
 
 
